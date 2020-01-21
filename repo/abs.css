@@ -29,13 +29,22 @@
 .test4{border:solid yellow 1px;}
 
 .flex { display:flex; }
-    .column { flex-direction:column; }
+    .col { flex-direction:column; }
+    .colrev { flex-direction:column-reverse; }
     .row { flex-direction:row; }
-    .center-w { justify-content:center; }
-    .spaced { justify-content:space-between; }
-    .center-h { align-items:center; }
-    .start-h { align-items:flex-start; }
-    .end-h { align-items:flex-end; }
+    .rowrev { flex-direction:row-reverse; }
+
+    .h-start { justify-content:flex-start; }
+    .h-center { justify-content:center; }
+    .h-end { justify-content:flex-end; }
+    .h-spaced, .spaced, .spread { justify-content:space-between; }
+    .h-centerspaced { justify-content:space-around; }
+
+    .v-start { align-items:flex-start; }
+    .v-center { align-items:center; }
+    .v-end { align-items:flex-end; }
+
+    .center { justify-content:center; align-items:center; }
     
     /*---GENERAL------------------------------------------------------*/
     
