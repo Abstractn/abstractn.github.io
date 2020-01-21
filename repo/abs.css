@@ -1,0 +1,47 @@
+/*---INIT---------------------------------------------------------*/
+
+@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+
+:root
+{
+    --main-color-b1:#111;
+    --main-color-b2:#222;
+    --main-color-b3:#333;
+    --main-color-g:#555;
+    --main-color-lg:#aaa;
+    --main-color-lw:#ccc;
+    --main-color-w:#eee;
+
+    --noixe-color-ar:#7700cc;
+    --noixe-color-ar1:#690db9;
+    --noixe-color-ar2:#fc48cd;
+    --noixe-color-ar2:#f893fc;
+    --noixe-color-g:#aaa;
+    --noixe-color-lb:#83fffd;
+    --noixe-color-b:#388dff;
+
+    --main-font-std:arial;
+}
+
+.test{border:solid red 1px;}
+.test2{border:solid blue 1px;}
+.test3{border:solid green 1px;}
+.test4{border:solid yellow 1px;}
+
+.flex { display:flex; }
+    .column { flex-direction:column; }
+    .row { flex-direction:row; }
+    .center-w { justify-content:center; }
+    .spaced { justify-content:space-between; }
+    .center-h { align-items:center; }
+    .start-h { align-items:flex-start; }
+    .end-h { align-items:flex-end; }
+    
+    /*---GENERAL------------------------------------------------------*/
+    
+    body
+    {
+      color:var(--main-color-w);
+      background-color:var(--main-color-b3);
+      font-family:var(--main-font-std);
+    }
