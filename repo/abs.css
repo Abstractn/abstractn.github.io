@@ -45,12 +45,14 @@
     .v-end { align-items:flex-end; }
 
     .center { justify-content:center; align-items:center; }
+
+.autocenter { margin:0 auto; }
     
     /*---GENERAL------------------------------------------------------*/
     
-    body
-    {
-      color:var(--main-color-w);
-      background-color:var(--main-color-b3);
-      font-family:var(--main-font-std);
-    }
+body
+{
+  color:var(--main-color-w);
+  background-color:var(--main-color-b3);
+  font-family:var(--main-font-std);
+}
