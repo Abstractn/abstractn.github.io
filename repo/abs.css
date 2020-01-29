@@ -1,6 +1,7 @@
 /*---INIT---------------------------------------------------------*/
 
-@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+/* @import url("https://meyerweb.com/eric/tools/css/reset/reset.css"); */
+@import url("reset.css");
 
 :root
 {
@@ -25,7 +26,7 @@
 
 @font-face
 {
-    font-family: "Rounded Elegance";
+    font-family:"Rounded Elegance";
     src:url(Rounded_Elegance.ttf);
 }
 
@@ -61,4 +62,5 @@ body
     color:var(--main-color-w);
     background-color:var(--main-color-b3);
     font-family:var(--main-font-std);
+    min-height:100vh;
 }
