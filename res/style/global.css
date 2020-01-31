@@ -1,6 +1,54 @@
 body
 {
-  color:#eee;
-  background-color:#333;
-  font-family:arial;
+    background-color:black;
+}
+
+.rounded-elegance { font-family:"Rounded Elegance"; }
+.unselectable { pointer-events:none; user-select:none; }
+.aa { filter:blur(0.5px); }
+
+/* ################################################################### */
+
+#sign { font-size:4em; }
+
+#bgimage
+{
+    margin:0px auto;
+    position:fixed;
+    z-index:-1;
+    height:130%;
+    width:130%;
+    left:-40;
+    top:-40;
+
+    background-repeat:no-repeat;
+    transition:.1s ease-out;
+    background-image:url("../imgs/bg/abs_bg.jpg");
+    background-size:cover;
+    filter:grayscale(20%) blur(30px); /* 10 */
+}
+
+.box
+{
+    width:max-content;
+    max-width:calc(100% - 300px);
+    padding:30px 60px 30px 60px;
+    background-color:rgba(0,0,0,.2);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+}
+
+.hr-mid
+{
+    border:0;
+    height:2px;
+    margin-top:40px;
+	margin-bottom:30px;
+    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));
+}
+
+.hr-light
+{
+    border:0;
+    height:1px;
+    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
 }
