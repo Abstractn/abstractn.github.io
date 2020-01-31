@@ -1,3 +1,8 @@
+:root
+{
+    --main-stroke:black 1px 1px 1px, black -1px 1px 1px, black 1px -1px 1px, black -1px -1px 1px;
+}
+
 body
 {
     background-color:black;
@@ -6,6 +11,8 @@ body
 .rounded-elegance { font-family:"Rounded Elegance"; }
 .unselectable { pointer-events:none; user-select:none; }
 .aa { filter:blur(0.5px); }
+.stroke { text-shadow:var(--main-stroke); }
+.disabled { opacity:.5; pointer-events:none; }
 
 /* ################################################################### */
 
@@ -28,11 +35,17 @@ body
     filter:grayscale(20%) blur(30px); /* 10 */
 }
 
+main
+{
+    margin:0;
+    padding:50px;
+}
+
 .box
 {
     width:max-content;
     max-width:calc(100% - 300px);
-    padding:30px 60px 30px 60px;
+    padding:40px 60px 40px 60px;
     background-color:rgba(0,0,0,.2);
     box-shadow: 0 3px 5px rgba(0,0,0,0.3);
 }
@@ -42,7 +55,7 @@ body
     border:0;
     height:2px;
     margin-top:40px;
-	margin-bottom:30px;
+	margin-bottom:40px;
     background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));
 }
 
@@ -50,5 +63,43 @@ body
 {
     border:0;
     height:1px;
+    margin-top:20px;
+	margin-bottom:20px;
     background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+/* ########################################################################### */
+
+#header-list a
+{
+    min-width:15%;
+    padding:5px 20px;
+    /* margin:0 20px; */
+    text-align:center;
+    font-family:"Rounded Elegance";
+    font-size:1.2em;
+    font-weight:bold;
+    text-shadow:var(--main-stroke);
+}
+
+#header-list a:hover
+{
+    box-shadow:black 0 0 5px;
+}
+
+/* ############################################################################# */
+
+@media only screen and (max-width: 720px)
+{
+    #header-list
+    {
+        height: auto;
+        flex-direction:column;
+	}
+    #header-list a
+    {
+        width:100%;
+        padding:10px;
+		display:block;
+	}
 }
