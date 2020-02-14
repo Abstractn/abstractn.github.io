@@ -54,6 +54,10 @@
     .center { justify-content:center; align-items:center; }
 
 .autocenter { margin:0 auto; }
+
+.extend{min-height:100vh;min-width:100%;}
+    .extend-h{min-height:100vh;}
+    .extend-w{min-width:100%;}
     
     /*---GENERAL------------------------------------------------------*/
     
