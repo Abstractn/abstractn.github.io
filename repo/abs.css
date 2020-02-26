@@ -58,6 +58,8 @@
 .extend{min-height:100vh;min-width:100%;}
     .extend-h{min-height:100vh;}
     .extend-w{min-width:100%;}
+
+.hidden{display:none;}
     
     /*---GENERAL------------------------------------------------------*/
     
