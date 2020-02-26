@@ -1,0 +1,59 @@
+Abstractn's JavaScript library documentation
+
+    --- ACCORDIONS ---
+    HTML template:
+
+<div class=" [containerSelector] ">
+    <div class=" [headerSelector] ">
+        ...
+        <i class="[iconSelector] ..."></i>
+    </div>
+    <div class=" [contentSelector] [hidingClass] ">
+        ...
+    </div>
+</div>
+
+-params:
+    containerSelector
+        class selector to point at each accordion;
+        has GET/SET methods;
+        default="abs-accordion-container";
+
+    headerSelector
+        class selector to point at the accordion's header;
+        has GET/SET methods;
+        default="abs-accordion-header";
+
+    contentSelector
+        class selector to point at the accordion's content;
+        has GET/SET methods;
+        default="abs-accordion-content";
+
+    iconSelector
+        class selector to point at the accordion's open/close icon;
+        has GET/SET methods;
+        default="abs-accordion-icon";
+
+    iconType
+        switches between class toggle and plain text;
+        has GET/SET methods;
+        default="text";
+
+    iconOpen
+        element (text or class) displayed/toggled when the accordion is open and can be closed;
+        has GET/SET methods;
+        default="-";
+
+    iconClosed
+        element (text or class) displayed/toggled when the accordion is closed and can be opened;
+        has GET/SET methods;
+        default="+";
+
+-methods:
+
+    init():
+        executes accordion core logic:
+            reads DOM for all accordions by containerSelector and appends click events,
+            manages icon toggle;
+
+        returns: accordions:object // node list of all loaded accordions
