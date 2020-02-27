@@ -16,38 +16,42 @@ Abstractn's JavaScript library documentation
 -params:
     containerSelector
         class selector to point at each accordion;
-        has GET/SET methods;
         default="abs-accordion-container";
 
     headerSelector
         class selector to point at the accordion's header;
-        has GET/SET methods;
         default="abs-accordion-header";
 
     contentSelector
         class selector to point at the accordion's content;
-        has GET/SET methods;
         default="abs-accordion-content";
 
     iconSelector
         class selector to point at the accordion's open/close icon;
-        has GET/SET methods;
         default="abs-accordion-icon";
 
     iconType
         switches between class toggle and plain text;
-        has GET/SET methods;
+        values="text / class";
         default="text";
 
     iconOpen
         element (text or class) displayed/toggled when the accordion is open and can be closed;
-        has GET/SET methods;
         default="-";
 
     iconClosed
         element (text or class) displayed/toggled when the accordion is closed and can be opened;
-        has GET/SET methods;
         default="+";
+
+    eventTrigger
+        element to appent the open/close event to;
+        values="header / icon";
+        default="header";
+
+    eventType
+        what action triggers the event;
+        values="click / dblclick";
+        default="click";
 
 -methods:
 
@@ -55,5 +59,4 @@ Abstractn's JavaScript library documentation
         executes accordion core logic:
             reads DOM for all accordions by containerSelector and appends click events,
             manages icon toggle;
-
         returns: accordions:object // node list of all loaded accordions
