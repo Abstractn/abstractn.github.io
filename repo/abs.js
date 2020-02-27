@@ -65,7 +65,7 @@ var abs =
                             case 'class': icon.classList.replace( abs.accordion.iconClosed, abs.accordion.iconOpen );
                             break;
                             
-                            case 'text': icon.innerHTML = ab.accordion.iconOpen;
+                            case 'text': icon.innerHTML = abs.accordion.iconOpen;
                             break;
 
                             default: console.error("abs.accordion.iconType param is not set");
@@ -78,7 +78,7 @@ var abs =
                             case 'class': icon.classList.replace( abs.accordion.iconOpen, abs.accordion.iconClosed );
                             break;
 
-                            case 'text': icon.innerHTML = ab.accordion.iconClosed;
+                            case 'text': icon.innerHTML = abs.accordion.iconClosed;
                             break;
 
                             default: console.error("abs.accordion.iconType param is not set");
