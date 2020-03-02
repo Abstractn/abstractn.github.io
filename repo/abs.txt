@@ -6,7 +6,7 @@ Abstractn's JavaScript library documentation
 
 -CDN:
 
-    https://abstractn.gibhub.io/repo/abs.js
+    https://abstractn.github.io/repo/abs.js
 
 
 
