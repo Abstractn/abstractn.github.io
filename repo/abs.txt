@@ -1,6 +1,9 @@
 Abstractn's JavaScript library documentation
 
+
+
     --- ACCORDIONS ---
+    
     HTML template:
 
 <div class=" [containerSelector] ">
@@ -12,6 +15,8 @@ Abstractn's JavaScript library documentation
         ...
     </div>
 </div>
+
+
 
 -params:
     containerSelector
