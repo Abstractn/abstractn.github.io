@@ -1,6 +1,7 @@
 /*---INIT---------------------------------------------------------*/
 
 /* @import url("https://meyerweb.com/eric/tools/css/reset/reset.css"); */
+@import url("necolas-normalize.css");
 @import url("reset.css");
 
 :root
