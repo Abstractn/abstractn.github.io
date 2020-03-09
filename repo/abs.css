@@ -13,15 +13,23 @@
     --main-color-lw:#ccc;
     --main-color-w:#eee;
 
-    --noixe-color-ar:#7700cc;
-    --noixe-color-ar1:#690db9;
-    --noixe-color-ar2:#fc48cd;
-    --noixe-color-ar2:#f893fc;
-    --noixe-color-g:#aaa;
-    --noixe-color-lb:#83fffd;
-    --noixe-color-b:#388dff;
+        --abs-col-b1:#111;
+        --abs-col-b2:#222;
+        --abs-col-b3:#333;
+        --abs-col-g:#555;
+        --abs-col-lg:#aaa;
+        --abs-col-lw:#ccc;
+        --abs-col-w:#eee;
 
-    --main-font-std:arial;
+    --abs-col-noixe:#7700cc;
+    --abs-col-noixe-ar1:#690db9;
+    --abs-col-noixe-ar2:#fc48cd;
+    --abs-col-noixe-ar3:#f893fc;
+    --abs-col-noixe-g:#aaa;
+    --abs-col-noixe-lb:#83fffd;
+    --abs-col-noixe-b:#388dff;
+
+    --abs-font-std:arial;
 }
 
 @font-face
@@ -65,8 +73,8 @@
     
 body
 {
-    color:var(--main-color-w);
-    background-color:var(--main-color-b3);
-    font-family:var(--main-font-std);
+    color:var(--abs-col-w);
+    background-color:var(--abs-col-b3);
+    font-family:var(--abs-font-std);
     min-height:100vh;
 }
