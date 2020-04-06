@@ -5,6 +5,7 @@
 
 body
 {
+    font-size:10px;
     background-color:black;
 }
 
@@ -14,9 +15,23 @@ body
 .stroke { text-shadow:var(--main-stroke); }
 .disabled { opacity:.5; pointer-events:none; }
 
-/* ################################################################### */
+.hr-mid
+{
+    border:0;
+    height:2px;
+    margin:20px 0px;
+    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));
+}
 
-#sign { font-size:4em; }
+.hr-light
+{
+    border:0;
+    height:1px;
+    margin:10px 0px;
+    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+/* ########################################################################################### */
 
 #bgimage
 {
@@ -29,77 +44,82 @@ body
     top:-40;
 
     background-repeat:no-repeat;
-    transition:.1s ease-out;
     background-image:url("../imgs/bg/abs_bg.jpg");
     background-size:cover;
+    background-position:center;
+    transition:.1s ease-out;
     filter:grayscale(20%) blur(30px); /* 10 */
+}
+
+#sign
+{
+    font-size:4rem;
+    text-align:center;
 }
 
 main
 {
-    margin:0;
-    padding:50px;
+    display:flex;
+        justify-content:center;
+        align-items:center;
+    height:100%;
 }
 
 .box
 {
     width:max-content;
-    max-width:calc(100% - 300px);
-    padding:40px 60px 40px 60px;
+    padding:40px 60px;
     background-color:rgba(0,0,0,.2);
     box-shadow: 0 3px 5px rgba(0,0,0,0.3);
 }
 
-.hr-mid
+#linktree
 {
-    border:0;
-    height:2px;
-    margin-top:40px;
-	margin-bottom:40px;
-    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));
+    width:100%;
+    padding:0px 5px;
 }
 
-.hr-light
+#linktree a
 {
-    border:0;
-    height:1px;
-    margin-top:20px;
-	margin-bottom:20px;
-    background-image:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
-}
+    width:100%;
 
-/* ########################################################################### */
+    padding:0px 20px;
+    padding-top:5px;
+    margin:5px 0px;
 
-#header-list a
-{
-    min-width:15%;
-    padding:5px 20px;
-    /* margin:0 20px; */
     text-align:center;
+    font-size:1.7rem;
     font-family:"Rounded Elegance";
-    font-size:1.2em;
     font-weight:bold;
     text-shadow:var(--main-stroke);
 }
 
-#header-list a:hover
+#linktree a:hover, #linktree a:active
 {
-    box-shadow:black 0 0 5px;
+    text-shadow:white 0px 0px 10px;
 }
 
-/* ############################################################################# */
+/* ########################################################################################### */
 
-@media only screen and (max-width: 720px)
+@media (max-width:472px)
 {
-    #header-list
+    #sign
     {
-        height: auto;
-        flex-direction:column;
-	}
-    #header-list a
+        font-size:2rem;
+    }
+
+    .box
     {
-        width:100%;
-        padding:10px;
-		display:block;
-	}
+        padding:20px 40px;
+    }
+
+    #linktree a
+    {
+        font-size:1.2rem;
+    }
+
+    #linktree a:active
+    {
+        text-shadow:white 0px 0px 10px;
+    }
 }
