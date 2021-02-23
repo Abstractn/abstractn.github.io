@@ -8,24 +8,50 @@
         <link rel="stylesheet" type="text/css" href="res/style/reset.css">
         <link rel="stylesheet" type="text/css" href="https://abstractn.github.io/repo/abs.css">
         <link rel="stylesheet" type="text/css" href="res/style/global.css">
+        <link rel="stylesheet" type="text/css" href="res/style/anims.css">
         <link rel="stylesheet" type="text/css" href="res/style/index.css">
     </head>
 
     <body>
         <div id="bgimage"></div>
         <main>
-            <div class="box flex col center">
-                <!-- <div id="sign" class="rounded-elegance aa unselectable">Abstractn</div> -->
-                <img src="res/imgs/abstractn-logo.png" id="logo">
+            <div id="box-main" class="box flex col center">
+                <div class="box-header">
+                   <img src="res/imgs/abstractn-logo.png" id="logo"> 
+                </div>                
                 <hr class="hr-mid">
-                <div id="linktree" class="flex col center">
-                    <a href="https://soundcloud.com/abstractn">MUSIC</a>
-                    <a href="https://abstractngt.deviantart.com">LITERATURE</a>
-                    <a href="" class="disabled">GAMING</a>
-                    <a href="https://abstractn.github.io/rand">CODE</a>
+                <div class="box-body relative" style="width: 300px; height: 200px;"> <!-- TODO move style to css -->
+                    <!-- <div id="sign" class="rounded-elegance aa unselectable">Abstractn</div> -->
+                    <div id="menu-main" class="flex col center absolute">
+                        <!-- <a id="linktree-resume" href="#" class="disabled">RESUME</a> -->
+                        <a id="linktree-music" href="#">MUSIC</a>
+                        <a id="linktree-literature" href="https://abstractngt.deviantart.com" target="_blank">LITERATURE</a>
+                        <!-- <a id="linktree-gaming" href="#" class="disabled">GAMING</a> -->
+                        <a id="linktree-code" href="https://abstractn.github.io/rand">CODE</a>
+                    </div>
+                    <div id="menu-music" class="flex col center absolute hidden"> <!-- TODO margin:auto + width:100% -->
+                        <span class="link music-to-home">back</span>
+                        <div class="flex row">
+                            <i
+                                link
+                                title="Google Drive"
+                                class="custom-icon"
+                                src="res/imgs/icons/g-drive.png"
+                                href="https://drive.google.com/drive/folders/1Oz8HGo32nvuMqGdONZstJXA8PhBOYjNg?usp=sharing">
+                            </i>
+                            <i
+                                link
+                                title="Mega"
+                                class="custom-icon"
+                                src="res/imgs/icons/mega.png"
+                                href="https://mega.nz/folder/8GIhQSrb#F0HuExk980tVhxRofwe1YA">
+                            </i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </body>
     <script src="res/script/libs/jquery.js"></script>
+    <script src="res/script/main.js"></script>
 </html>

@@ -1,6 +1,7 @@
 :root
 {
     --main-stroke:black 1px 1px 1px, black -1px 1px 1px, black 1px -1px 1px, black -1px -1px 1px;
+    --main-anim-duration: .3s;
 }
 
 body
@@ -13,7 +14,14 @@ body
 .unselectable { pointer-events:none; user-select:none; }
 .aa { filter:blur(0.5px); }
 .stroke { text-shadow:var(--main-stroke); }
-.disabled { opacity:.5; pointer-events:none; }
+.disabled { pointer-events: none; }
+a.disabled { opacity: .5; }
+.hidden { display: none; }
+[link], .link { cursor: pointer; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.absolute-top { top: 0; left: 50%; transform: translateX() }
 
 .hr-mid
 {
@@ -37,74 +45,70 @@ body
 
 #bgimage
 {
-    margin:0px auto;
-    position:fixed;
-    z-index:-1;
-    height:130%;
-    width:130%;
-    left:-40;
-    top:-40;
-
-    background-repeat:no-repeat;
-    background-image:url("../imgs/bg/abs_bg.jpg");
-    background-size:cover;
-    background-position:center;
-    transition:.1s ease-out;
-    filter:grayscale(20%) blur(30px); /* 10 */
+    /* margin: 0px auto; */
+    position: fixed;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-image: url("../imgs/bg/abs_bg-blur.png");
+    background-size: cover;
+    background-position: center;
 }
 
 /* #sign
 {
-    font-size:4rem;
-    text-align:center;
+    font-size: 4rem;
+    text-align: center;
 } */
 
 #logo
 {
-    width:100px;
-    margin:-75px 0px -20px 0px;
+    width: 100px;
+    margin: -75px 0px -20px 0px;
 }
 
 main
 {
-    display:flex;
-        justify-content:center;
-        align-items:center;
-    height:100%;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+    height: 100%;
 }
 
 .box
 {
-    width:max-content;
-    padding:40px 60px;
-    background-color:rgba(0,0,0,.2);
+    width: max-content;
+    padding: 40px 60px;
+    background-color: rgba(0,0,0,.2);
     box-shadow: 0 3px 5px rgba(0,0,0,0.3);
 }
 
-#linktree
+#menu-main
 {
-    width:100%;
-    padding:0px 5px;
+    width: 100%;
+    padding: 0px 5px;
 }
 
-#linktree a
+#menu-main a
 {
-    width:100%;
+    width: 100%;
 
-    padding:0px 20px;
-    padding-top:5px;
-    margin:5px 0px;
+    padding: 0px 20px;
+    padding-top: 5px;
+    margin: 5px 0px;
 
-    text-align:center;
-    font-size:1.7rem;
-    font-family:"Rounded Elegance";
-    font-weight:bold;
-    text-shadow:var(--main-stroke);
+    text-align: center;
+    font-size: 1.7rem;
+    font-family: "Rounded Elegance";
+    font-weight: bold;
+    text-shadow: var(--main-stroke);
+    transition: text-shadow .3s;
 }
 
-#linktree a:hover, #linktree a:active
+#menu-main a:hover, #menu-main a:active
 {
-    text-shadow:white 0px 0px 10px;
+    text-shadow: white 0px 0px 10px;
 }
 
 /* ########################################################################################### */
@@ -113,21 +117,21 @@ main
 {
     #sign
     {
-        font-size:2rem;
+        font-size: 2rem;
     }
 
     .box
     {
-        padding:20px 40px;
+        padding: 20px 40px;
     }
 
-    #linktree a
+    #menu-main a
     {
-        font-size:1.2rem;
+        font-size: 1.2rem;
     }
 
-    #linktree a:active
+    #menu-main a:active
     {
-        text-shadow:white 0px 0px 10px;
+        text-shadow: white 0px 0px 10px;
     }
 }
