@@ -1,3 +1,5 @@
+const ROUTE_MUSIC = '#music';
+
 const linkTreeView = document.querySelector('#menu-main');
 const musicView = document.querySelector('#menu-music');
 const musicNode = document.querySelector('#linktree-music');
@@ -16,10 +18,19 @@ function customLinksEvent() {
     customLinksNodes.forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
-            if( link.hasAttribute('link-newtab') ) {
-                window.open(link.getAttribute('href'), '_blank');
-            } else {
-                window.open(link.getAttribute('href'));
+            switch( true ) {
+                case link.getAttribute('href') === '':
+                break;
+                case link.getAttribute('href').charAt(0) == '#':
+                    window.location.hash = link.getAttribute('href');
+                break;
+                default:
+                    if( link.hasAttribute('link-newtab') ) {
+                        window.open(link.getAttribute('href'), '_blank');
+                    } else {
+                        window.location = link.getAttribute('href');
+                    }
+                break;
             }
         });
     });
@@ -53,10 +64,20 @@ function musicToggle() {
     });
 }
 
+function urlManager() {
+    const URL = window.location;
+    switch( URL.hash ) {
+        case ROUTE_MUSIC:
+            musicNode.click();
+        break;
+    }
+}
+
 function init() {
     customIcons();
     customLinksEvent();
     musicToggle();
+    urlManager();
 }
 
 init();

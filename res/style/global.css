@@ -23,6 +23,7 @@ a.disabled { opacity: .5; }
 .relative { position: relative; }
 .absolute { position: absolute; }
 .absolute-init { top: 0; left: 0; }
+.absolute-center-y { top: 50%; transform: translateY(-50%); }
 
 .hr-mid
 {
@@ -84,7 +85,6 @@ main {
 
 #menu-main {
     width: 100%;
-    padding: 0px 5px;
 }
 
 #menu-main a {
@@ -126,6 +126,14 @@ i {
     background-size: contain;
     background-repeat: no-repeat;
     margin: 10px 20px;
+}
+
+.music-to-home {
+    position: absolute;
+    top: 50%;
+    left: -24px;
+    transform: translateY(-50%);
+    font-size: 1.8rem
 }
 
 /* ########################################################################################### */
