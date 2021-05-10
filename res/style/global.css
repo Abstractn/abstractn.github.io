@@ -43,6 +43,23 @@ a.disabled { opacity: .5; }
     background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
 }
 
+:focus
+{
+    outline: solid rgba(255, 255, 255, 0.9) 2px;
+}
+
+.sr-only
+{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
 /* ########################################################################################### */
 
 #bgimage
@@ -57,12 +74,6 @@ a.disabled { opacity: .5; }
     background-size: cover;
     background-position: center;
 }
-
-/* #sign
-{
-    font-size: 4rem;
-    text-align: center;
-} */
 
 #logo {
     width: 100px;
@@ -85,14 +96,15 @@ main {
 
 #menu-main {
     width: 100%;
+    margin-top: 12px;
 }
 
 #menu-main a {
     width: 100%;
 
-    padding: 0px 20px;
-    padding-top: 5px;
-    margin: 5px 0px;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 12px;
 
     text-align: center;
     font-size: 1.7rem;
