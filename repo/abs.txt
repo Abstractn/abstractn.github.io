@@ -9,8 +9,56 @@ Abstractn's JavaScript library documentation
     https://abstractn.github.io/repo/abs.js
 
 
+-DEFINITIONS:
 
--HTML template:
+    AbsAccordion : class
+                main object;
+
+
+-params:
+
+    variable : type = default
+
+    containerSelector : string = "abs-accordion-container"
+                class selector to point at each accordion;
+
+    headerSelector : string = "abs-accordion-header"
+                class selector to point at the accordion's header;
+
+    contentSelector : string = "abs-accordion-content"
+                class selector to point at the accordion's content;
+
+    iconSelector : string = "abs-accordion-icon"
+                class selector to point at the accordion's open/close icon;
+
+    iconType : "text" || "class" = "text"
+                switches between class toggle and plain text;
+
+    iconOpen : string = "-"
+                element (text or class) displayed/toggled when the accordion is open and can be closed;
+
+    iconClosed : string = "+"
+                element (text or class) displayed/toggled when the accordion is closed and can be opened;
+
+    eventTrigger : "header" || "icon" = "header"
+                element to appent the open/close event to;
+
+    eventType : "click" || "dbclick" = "click"
+                what action triggers the event;
+
+
+-methods:
+
+    function( arg : type = default, ... ) : return
+
+    init() : NodeListOf<Element>
+                executes accordion core logic:
+                    reads DOM for all accordions by containerSelector and appends click events,
+                    manages icon toggle;
+                returns: accordions:object // node list of all loaded accordions
+
+
+-Template example:
 
     <div class=" [containerSelector] ">
         <div class=" [headerSelector] ">
@@ -24,53 +72,98 @@ Abstractn's JavaScript library documentation
 
 
 
+    --- TRANSLATE ---
+
+-CDN:
+
+    https://abstractn.github.io/repo/abs.js
+
+
+-DEFINITIONS:
+
+    AbsTranslate : translate
+                main object;
+
+
 -params:
 
-    containerSelector
-                class selector to point at each accordion;
-                default="abs-accordion-container";
+    variable : type = default
 
-    headerSelector
-                class selector to point at the accordion's header;
-                default="abs-accordion-header";
+    storageKey : string || null = "language"
+                key used to automatically manage selected language storage inside browser localStorage;
+                set as null to disable this feature;
 
-    contentSelector
-                class selector to point at the accordion's content;
-                default="abs-accordion-content";
+    nodeSelector : "data-" + string = "data-translate"
+                (!) IMPORTANT --- must be used data attribute only
+                string used to selected translatable nodes and retrieve translatable IDs;
 
-    iconSelector
-                class selector to point at the accordion's open/close icon;
-                default="abs-accordion-icon";
+    missingTranslationWarning : boolean = false
+                enables console warning when a template-defined translation key is not found inside the script-defined dictionary object
+    
+    _dictionary : object<record<string, string>>
+                (!) IMPORTANT --- do not edit directly
+                internal dictionary storage;
+    
+    _previousLanguage : string
+                (!) IMPORTANT --- do not edit directly
+                last used language before new set;
+                can be used as get;
 
-    iconType
-                switches between class toggle and plain text;
-                values="text / class";
-                default="text";
-
-    iconOpen
-                element (text or class) displayed/toggled when the accordion is open and can be closed;
-                default="-";
-
-    iconClosed
-                element (text or class) displayed/toggled when the accordion is closed and can be opened;
-                default="+";
-
-    eventTrigger
-                element to appent the open/close event to;
-                values="header / icon";
-                default="header";
-
-    eventType
-                what action triggers the event;
-                values="click / dblclick";
-                default="click";
-
+    _currentLanguage : string
+                (!) IMPORTANT --- do not edit directly
+                currently used language;
+                can be used as get;
 
 
 -methods:
 
-    init():
-                executes accordion core logic:
-                    reads DOM for all accordions by containerSelector and appends click events,
-                    manages icon toggle;
-                returns: accordions:object // node list of all loaded accordions
+    function( arg : type = default, ... ) : return
+
+    setLanguage(languageID : string) : void
+                sets new language;
+                if a template-defined translation key is not found inside the script-defined dictionary object then the same untouched translation key will be displayed without errors;
+
+    addLanguage(languageID : string, dictionary : record<translationKey : string, string>) : void
+                add a dictionary object to the internally stored dictionaries;
+
+    removeLanguage(languageID : string) : void
+                deletes a dictionary from the internally stored ones;
+
+
+-Template example:
+
+    <h1   data-translate="foo"></h1> <!-- will print "foo" if not defined in dictionary -->
+    <p    data-translate="mySection-myLabel_1"></p>
+    <span data-translate="mySection-myLabel_2"></span>
+    <script>
+        const englishDictionary = {
+            "mySection-myLabel_1" : "Hello",
+            "mySection-myLabel_2" : "world",
+            "foo" : "bar"
+        };
+        const spanishDictionary = {
+            "mySection-myLabel_1" : "Hola",
+            "mySection-myLabel_2" : "mundo"
+        };
+        const frenchDictionary = {
+            "mySection-myLabel_1" : "Bonjour",
+            "mySection-myLabel_2" : "monde"
+        };
+        const italianDictionary = {
+            "mySection-myLabel_1" : "Ciao",
+            "mySection-myLabel_2" : "mondo"
+        };
+        const germanDictionary = {
+            "mySection-myLabel_1" : "Hallo",
+            "mySection-myLabel_2" : "Welt"
+        };
+        AbsTranslate.addLanguage('en', englishDictionary);
+        AbsTranslate.addLanguage('es', spanishDictionary);
+        AbsTranslate.addLanguage('fr', frenchDictionary);
+        AbsTranslate.addLanguage('it', italianDictionary);
+        AbsTranslate.addLanguage('de', germanDictionary);
+        AbsTranslate.setLanguage('en');
+    </script>
+
+
+
