@@ -14,88 +14,137 @@ function log(elem)
 // ### --- ACCORDION --- ##########################################################
 // ################################################################################
 
-var abs =
-{
-    accordion:
+class AbsAccordion { 
+    constructor() { throw Error('A static class cannot be instantiated.'); }
+       
+    static iconOpen = '-';
+    static iconClosed = '+';
+    static iconType = 'text'; // text || class
+    static containerSelector = 'abs-accordion-container';
+    static headerSelector = 'abs-accordion-header';
+    static contentSelector = 'abs-accordion-content';
+    static iconSelector = 'abs-accordion-icon';
+    static hidingClass = 'hidden';
+    static eventTrigger = 'header'; // header || icon
+    static eventType = 'click'; // click || dbclick
+
+    static init = function()
     {
-        iconOpen:'-',
-        iconClosed:'+',
-        iconType:'text', // text, class
-        containerSelector:'abs-accordion-container',
-        headerSelector:'abs-accordion-header',
-        contentSelector:'abs-accordion-content',
-        iconSelector:'abs-accordion-icon',
-        hidingClass:'hidden',
-        eventTrigger:'header', // header, icon
-        eventType:'click', // click. dbclick
+        const NOT_SET_ERROR_STRING = 'param is not set or incorrectly set';
+        let accordions = document.querySelectorAll('.' + this.containerSelector);
+        accordions.forEach(accordion => {
+            const header = accordion.querySelector('.' + this.headerSelector);
+            const content = accordion.querySelector('.' + this.contentSelector);
+            const icon = accordion.querySelector('.' + this.iconSelector)
+            
+            let eventTrigger;
+            switch(this.eventTrigger) {
+                case 'header':
+                    eventTrigger = header;
+                break;
 
-        init: function()
-        {
-            const _notSetErrStr = 'param is not set or incorrectly set';
-            let accordions = document.querySelectorAll('.'+abs.accordion.containerSelector);
-            accordions.forEach(accordion => {
-                const header = accordion.querySelector('.'+abs.accordion.headerSelector);
-                const content = accordion.querySelector('.'+abs.accordion.contentSelector);
-                const icon = accordion.querySelector('.'+abs.accordion.iconSelector)
-                
-                let eventTrigger;
-                switch( abs.accordion.eventTrigger )
-                {
-                    case 'header': eventTrigger = header;
-                    break;
+                case 'icon': 
+                    eventTrigger = icon;
+                break;
 
-                    case 'icon': eventTrigger = icon;
-                    break;
+                default: 
+                    eventTrigger = header;
+                    console.error('eventTrigger ' + NOT_SET_ERROR_STRING);
+                break;
+            }
+            
+            eventTrigger.addEventListener(this.eventType, () => {
+                const icon = header.querySelector('.' + this.iconSelector);
+                if( content.classList.contains(this.hidingClass) ) {
+                    switch( this.iconType ) {
+                        case 'class':
+                            icon.classList.replace( this.iconClosed, this.iconOpen );
+                        break;
+                        
+                        case 'text':
+                            icon.innerHTML = this.iconOpen;
+                        break;
 
-                    default: eventTrigger = header; console.error("abs.accordion.eventTrigger "+_notSetErrStr);
+                        default:
+                            console.error('iconType ' + NOT_SET_ERROR_STRING);
+                        break;
+                    }
                 }
-                
-                eventTrigger.addEventListener(abs.accordion.eventType, () => {
-                    const icon = header.querySelector('.'+abs.accordion.iconSelector);
-                    if( content.classList.contains(abs.accordion.hidingClass) )
-                    {
-                        switch( abs.accordion.iconType )
-                        {
-                            case 'class': icon.classList.replace( abs.accordion.iconClosed, abs.accordion.iconOpen );
-                            break;
-                            
-                            case 'text': icon.innerHTML = abs.accordion.iconOpen;
-                            break;
+                else {
+                    switch( this.iconType ) {
+                        case 'class':
+                            icon.classList.replace( this.iconOpen, this.iconClosed );
+                        break;
 
-                            default: console.error("abs.accordion.iconType "+_notSetErrStr);
-                        }
+                        case 'text':
+                            icon.innerHTML = this.iconClosed;
+                        break;
+
+                        default:
+                            console.error('iconType ' + NOT_SET_ERROR_STRING);
+                        break;
                     }
-                    else
-                    {
-                        switch( abs.accordion.iconType )
-                        {
-                            case 'class': icon.classList.replace( abs.accordion.iconOpen, abs.accordion.iconClosed );
-                            break;
-
-                            case 'text': icon.innerHTML = abs.accordion.iconClosed;
-                            break;
-
-                            default: console.error("abs.accordion.iconType "+_notSetErrStr);
-                        }
-                    }
-                    content.classList.toggle(abs.accordion.hidingClass);
-                });
+                }
+                content.classList.toggle(this.hidingClass);
             });
-            return accordions;
-        }
+        });
+        return accordions;
     }
 }
 
-/*
-    <!-- --- BASE HTML STRUCTURE FOR ACCORDIONS --- -->
-<div class="abs-accordion-container">
-    <div class="abs-accordion-header">
-        ...
-        <i class="abs-accordion-icon ..."></i>
-    </div>
-    <div class="abs-accordion-content hidden">
-        ...
-    </div>
-</div>
+// ################################################################################
+// ### --- TRANSLATE --- ##########################################################
+// ################################################################################
 
-*/
+class AbsTranslate {
+    constructor() { throw Error('A static class cannot be instantiated.'); }
+
+    static storageKey = 'language';
+    static nodeSelector = 'data-translate';
+    static missingTranslationWarning = false;
+    static _dictionary = {};
+    static _currentLanguage = null;
+    static _previousLanguage = null;
+
+    static setLanguage(languageID) {
+        if(languageID) {
+            if(this._dictionary[languageID]) {
+                this._previousLanguage = this._currentLanguage;
+                this._currentLanguage = languageID;
+                if(this.storageKey) {
+                    localStorage.setItem(this.storageKey,languageID);
+                }
+                let fields = document.querySelectorAll('[' + this.nodeSelector + ']');
+                fields.forEach(field => {
+                    const translationKey = field.getAttribute(this.nodeSelector);
+                    if(this._dictionary[languageID][translationKey]) {
+                        field.innerText = this._dictionary[languageID][translationKey];
+                    } else {
+                        if(this.missingTranslationWarning) {
+                            console.warn('Translation key "' + translationKey + '" in dictionary "' + languageID + '" is missing');
+                        }
+                        field.innerText = field.getAttribute(this.nodeSelector);
+                    }
+                });
+            } else {
+                console.error('Dictionary "' + languageID + '" is not defined.');
+            }
+        }
+    };
+
+    static addLanguage(languageID, dictionary) {
+        if(languageID && dictionary) {
+            this._dictionary[languageID] = dictionary;
+        }
+    };
+
+    static removeLanguage(languageID) {
+        if(languageID && this._dictionary[languageID]) {
+            if(languageID === this._currentLanguage) {
+                console.error('Cannot delete currently used dictionary,');
+            } else {
+                delete this._dictionary[languageID];
+            }
+        }
+    }
+}
