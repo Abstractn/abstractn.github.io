@@ -4,9 +4,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <meta name="description" content=""> -->
         <!-- <meta name="keywords" content=""> -->
-
         <title>Abstractn</title>
-
+        <link rel="icon" type="image/png" sizes="256x256" href="abs.ico">
         <link rel="stylesheet" type="text/css" href="res/style/reset.css">
         <link rel="stylesheet" type="text/css" href="https://abstractn.github.io/repo/abs.css">
         <link rel="stylesheet" type="text/css" href="res/style/global.css">
@@ -20,36 +19,38 @@
         <main>
             <div id="box-main" class="box flex col center">
                 <div class="box-header">
-                   <img src="res/imgs/abstractn-logo.png" id="logo"> 
+                   <img src="res/imgs/abstractn-logo.png" id="logo" alt="Abstractn"> 
                 </div>                
                 <hr class="hr-mid">
                 <div class="box-body relative" style="width: 300px; height: 200px;"> <!-- TODO move style to css -->
                     <!-- <div id="sign" class="rounded-elegance aa unselectable">Abstractn</div> -->
                     <div id="menu-main" class="flex col center absolute">
-                        <!-- <a id="linktree-resume" href="#" class="disabled">RESUME</a> -->
-                        <a id="linktree-music" href="#music">MUSIC</a>
-                        <a id="linktree-literature" href="https://abstractngt.deviantart.com" target="_blank">LITERATURE</a>
-                        <!-- <a id="linktree-gaming" href="#" class="disabled">GAMING</a> -->
-                        <a id="linktree-code" href="https://abstractn.github.io/rand">CODE</a>
+                        <!-- <a id="linktree-resume" href="#" class="menu-main-item disabled" tabindex="1">RESUME</a> -->
+                        <a id="linktree-music" class="menu-main-item" href="#music" tabindex="1">MUSIC</a>
+                        <a id="linktree-literature" class="menu-main-item" href="https://abstractngt.deviantart.com" target="_blank" tabindex="1">LITERATURE</a>
+                        <!-- <a id="linktree-gaming" class="menu-main-item disabled" href="#" tabindex="1">GAMING</a> -->
+                        <a id="linktree-code" class="menu-main-item" href="https://abstractn.github.io/rand" tabindex="1">CODE</a>
                     </div>
                     <div id="menu-music" class="flex col center absolute hidden"> <!-- TODO margin:auto + width:100% -->
-                        <i link href="#" class="link music-to-home bi bi-chevron-compact-left"></i>
+                        <i link href="#" class="link music-to-home bi bi-chevron-compact-left menu-music-item" tabindex="-1"></i>
                         <div class="flex row">
                             <i
                                 link
                                 link-newtab
                                 title="Google Drive"
-                                class="custom-icon"
+                                class="custom-icon menu-music-item"
                                 src="res/imgs/icons/g-drive.png"
-                                href="https://drive.google.com/drive/folders/1Oz8HGo32nvuMqGdONZstJXA8PhBOYjNg?usp=sharing">
+                                href="https://drive.google.com/drive/folders/1Oz8HGo32nvuMqGdONZstJXA8PhBOYjNg?usp=sharing"
+                                tabindex="-1">
                             </i>
                             <i
                                 link
                                 link-newtab
                                 title="Mega"
-                                class="custom-icon"
+                                class="custom-icon menu-music-item"
                                 src="res/imgs/icons/mega.png"
-                                href="https://mega.nz/folder/8GIhQSrb#F0HuExk980tVhxRofwe1YA">
+                                href="https://mega.nz/folder/8GIhQSrb#F0HuExk980tVhxRofwe1YA"
+                                tabindex="-1">
                             </i>
                         </div>
                     </div>
