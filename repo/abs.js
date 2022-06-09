@@ -10,6 +10,14 @@ function log(elem)
     { console.log(elem); }
 }
 
+function proportionalRange(
+  oldMin, oldMax,
+  newMin, newMax,
+  value
+) {
+  return ((newMax - newMin) / (oldMax - oldMin)) * (value - oldMin) + newMin;
+}
+
 // ################################################################################
 // ### --- ACCORDION --- ##########################################################
 // ################################################################################
