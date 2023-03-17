@@ -18,6 +18,17 @@ function proportionalRange(
   return ((newMax - newMin) / (oldMax - oldMin)) * (value - oldMin) + newMin;
 }
 
+function rgbToHex(r, g, b) {
+  const isRedWithinRange   = r > -1 && r < 256;
+  const isGreenWithinRange = g > -1 && g < 256;
+  const isBlueWithinRange  = b > -1 && b < 256;
+  if(isRedWithinRange && isGreenWithinRange && isBlueWithinRange) {
+    return ((r << 16) | (g << 8) | b).toString(16).toUpperCase();
+  } else {
+    return undefined;
+  }
+}
+
 // ################################################################################
 // ### --- ACCORDION --- ##########################################################
 // ################################################################################
