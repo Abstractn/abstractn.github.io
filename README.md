@@ -1,3 +1,6 @@
+### - - - library is currently being reworked in Typescript - - -
+---
+
 ## Abs library
 - [Javascript](https://abstractn.github.io/repo/abs.js)
 - [CSS](https://bstractn.github.io/repo/abs.css)
