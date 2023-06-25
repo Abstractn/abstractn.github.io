@@ -11,9 +11,7 @@ export interface AbsTranslateDictionary {
 export type AbsTranslateDictionaryTranslationKey = string;
 export type AbsTranslateDictionaryId = string;
 
-export default class AbsTranslate {
-  //constructor() { throw Error('A static class cannot be instantiated.'); }
-
+export class AbsTranslate {
   public static storageKey: string = 'abs.translate';
   public static nodeAttributeSelector: string = 'data-abs-translate';
   public static isMissingTranslationWarningEnabled: boolean = false;
