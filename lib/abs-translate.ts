@@ -22,22 +22,26 @@ export default class AbsTranslate {
   private static _previousLanguage: AbsTranslateDictionaryId | null = null;
 
   public static setLanguage(languageId: AbsTranslateDictionaryId): void {
-    if(this._dictionary === undefined) throw Error(`[ABS] Dictionary is not defined.`);
-    const selectedLanguage = this._dictionary.find(language => language.languageId === languageId)
-    if(selectedLanguage === undefined) throw Error(`[ABS] Language "${languageId}" not found.`);
-    this._previousLanguage = this._currentLanguage;
-    this._currentLanguage = languageId;
-    this.storageKey && localStorage.setItem(this.storageKey, languageId);
+    try {
+      if(this._dictionary === undefined) throw `[ABS] Dictionary is not defined.`;
+      const selectedLanguage = this._dictionary.find(language => language.languageId === languageId)
+      if(selectedLanguage === undefined) throw `[ABS] Language "${languageId}" not found.`;
+      this._previousLanguage = this._currentLanguage;
+      this._currentLanguage = languageId;
+      this.storageKey && localStorage.setItem(this.storageKey, languageId);
 
-    const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.nodeAttributeSelector}]`);
-    nodeList.forEach(node => {
-      const translationKey: AbsTranslateDictionaryTranslationKey | null = node.getAttribute(this.nodeAttributeSelector);
-      (translationKey === null && this.isMissingTranslationWarningEnabled) && console.warn(`[ABS] Translation key "${translationKey}" is not defined in language "${languageId}"`);
-      if(translationKey) {
-        const translation = this.translate(translationKey);
-        node.innerText = translation || translationKey;
-      }
-    });
+      const nodeList: NodeListOf<HTMLElement> = document.querySelectorAll(`[${this.nodeAttributeSelector}]`);
+      nodeList.forEach(node => {
+        const translationKey: AbsTranslateDictionaryTranslationKey | null = node.getAttribute(this.nodeAttributeSelector);
+        (translationKey === null && this.isMissingTranslationWarningEnabled) && console.warn(`[ABS] Translation key "${translationKey}" is not defined in language "${languageId}"`);
+        if(translationKey) {
+          const translation = this.translate(translationKey);
+          node.innerText = translation || translationKey;
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public static getCurrentLanguage(): AbsTranslateDictionaryId | null {
@@ -62,12 +66,16 @@ export default class AbsTranslate {
   }
 
   public static translate(translationKey: AbsTranslateDictionaryTranslationKey, language: AbsTranslateDictionaryId = this._currentLanguage as AbsTranslateDictionaryId): string | undefined {
-    if(this._dictionary === undefined) throw Error(`[ABS] Dictionary is not defined.`);
-    const currentLanguageDictionary = this._dictionary?.find(dictionary => dictionary.languageId === language);
-    if(language === undefined || language === null) throw Error(`[ABS] Default language is not defined.`);
-    if(currentLanguageDictionary === undefined) throw Error(`[ABS] Language "${language}" not found.`);
-    const translationItem = currentLanguageDictionary.content.find(languageItem => languageItem.translationKey === translationKey)
-    return translationItem?.label || undefined;
+    try {
+      if(this._dictionary === undefined) throw `[ABS] Dictionary is not defined.`;
+      const currentLanguageDictionary = this._dictionary?.find(dictionary => dictionary.languageId === language);
+      if(language === undefined || language === null) throw `[ABS] Default language is not defined.`;
+      if(currentLanguageDictionary === undefined) throw `[ABS] Language "${language}" not found.`;
+      const translationItem = currentLanguageDictionary.content.find(languageItem => languageItem.translationKey === translationKey)
+      return translationItem?.label || undefined;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public static addDictionary(newDictionary: AbsTranslateDictionary): void {
@@ -83,16 +91,20 @@ export default class AbsTranslate {
   }
 
   public static removeDictionary(languageId: AbsTranslateDictionaryId): AbsTranslateDictionary | undefined {
-    if(this._dictionary === undefined) throw Error(`[ABS] Dictionary is not defined.`);
-    const language = this._dictionary?.find(e => e.languageId === languageId);
-    const languageIndex = this._dictionary?.indexOf(language as AbsTranslateDictionary);
-    const removedDictionary = languageIndex !== -1 ?
-      this._dictionary.splice(languageIndex, 1)[0] :
-      undefined;
-    if(this._dictionary.length === 0) {
-      this._dictionary = undefined;
+    try {
+      if(this._dictionary === undefined) throw `[ABS] Dictionary is not defined.`;
+      const language = this._dictionary?.find(e => e.languageId === languageId);
+      const languageIndex = this._dictionary?.indexOf(language as AbsTranslateDictionary);
+      const removedDictionary = languageIndex !== -1 ?
+        this._dictionary.splice(languageIndex, 1)[0] :
+        undefined;
+      if(this._dictionary.length === 0) {
+        this._dictionary = undefined;
+      }
+      return removedDictionary;
+    } catch (error) {
+      console.error(error);
     }
-    return removedDictionary;
   }
 
   private static readonly _utils = {
