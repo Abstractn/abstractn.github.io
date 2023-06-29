@@ -134,6 +134,10 @@ export class AbsTemplate {
     return template;
   }
 
+  public static compile(template: string, data: AbsTemplateData): string {
+    return this.parse(template, data);
+  }
+
   private static util = {
     nodeToString: (node: HTMLElement): string => {
       return node.outerHTML.replaceAll('\n', '');
@@ -149,9 +153,4 @@ export class AbsTemplate {
       return string.substring(0, characterIndex) + string.substring(characterIndex + 1, string.length);
     }
   }
-
-  //TODO split the data compiling part of `build()` into its own function so that it can be used separately
-  /* compile(targetNode: HTMLElement): HTMLElement {
-
-  }; */
 }
