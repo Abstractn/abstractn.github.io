@@ -31,7 +31,6 @@ export class AbsTemplate {
         templateNodeContentString = this.parse(templateNodeContentString, config.templateData as AbsTemplateData);
       }
 
-      debugger;
       const parsedNode = this.util.stringToNode(templateNodeContentString);
       const mockNode = document.createElement('mock');
       mockNode.appendChild(parsedNode);
