@@ -85,8 +85,8 @@ export class AbsTemplate {
   }
 
   private static parseConditions(template: string, data: AbsTemplateData): string {
-    //BUG if there are multiple constructs of the same type inside each other
-    //the first level will probably match very first closing pattern found (the inner-most construct)
+    //BUG if there are multiple statements of the same type inside each other
+    //the first level will probably match very first closing pattern found (the inner-most statement)
     //and the result is overlapped
     //FIXME run a `this.parse()` before anything else
     //by passing the `conditionContent` of the current match as restricted `template` parameter
@@ -96,8 +96,8 @@ export class AbsTemplate {
   }
 
   private static parseCycles(template: string, data: AbsTemplateData): string {
-    //BUG if there are multiple constructs of the same type inside each other
-    //the first level will probably match very first closing pattern found (the inner-most construct)
+    //BUG if there are multiple statements of the same type inside each other
+    //the first level will probably match very first closing pattern found (the inner-most statement)
     //and the result is overlapped
     //FIXME run a `this.parse()` before anything else
     //by passing the `cycleContent` of the current match as restricted `template` parameter
@@ -117,7 +117,7 @@ export class AbsTemplate {
         let res = '';
         if(!Array.isArray(list)) throw `${this.CONSOLE_PREFIX} Template contains a "forEach" with a parameter that cannot be iterated.`;
         list.forEach(listItem => {
-          //BUG same case for constructs inside each other
+          //BUG same case for statements inside each other
           //an `${itemKey}.(...listItem)` could be found not wrapped by standard curly brackets pattern
           const subParamRegex = new RegExp(`\\\{\\\{${itemKey}\\.(.+?)\\\}\\\}`,'g');
           res += this.parseParameters(cycleContent, listItem, subParamRegex);
