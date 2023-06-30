@@ -84,6 +84,7 @@ export class AbsTemplate {
   }
 
   private static parseConditions(template: string, data: AbsTemplateData): string {
+    //TODO
     //BUG if there are multiple statements of the same type inside each other
     //the first level will probably match very first closing pattern found (the inner-most statement)
     //and the result is overlapped
@@ -128,8 +129,8 @@ export class AbsTemplate {
   }
 
   private static parse(template: string, data: AbsTemplateData): string {
-    template = this.parseCycles(template, data);
     template = this.parseConditions(template, data);
+    template = this.parseCycles(template, data);
     template = this.parseParameters(template, data);
     return template;
   }
