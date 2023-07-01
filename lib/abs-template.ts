@@ -16,9 +16,10 @@ export interface AbsTemplateBuildConfig {
 
 export class AbsTemplate {
   private static readonly CONSOLE_PREFIX: string = '[ABS][TEMPLATE]';
-  public static readonly PARAMETER_MATCH_PATTERN: RegExp = /\{\{(.+?)\}\}/;
-  public static readonly CONDITION_MATCH_PATTERN: RegExp = /\{\{if (!?.+?)|((!?.+?) ==|===|!=|!==|>|>=|<|<=|&&|\|\| (!?.+?))\}\}/;
-  public static readonly CYCLE_MATCH_PATTERN: RegExp = /\{\{forEach (.+?) in (.+?)\}\}(.+?)\{\{\/forEach\}\}/;
+  public static readonly PARAMETER_PATTERN: RegExp = /\{\{(.+?)\}\}/;
+  public static readonly CONDITION_STATEMENT_PATTERN: RegExp = /\{\{if (.+?)\}\}(.+?)(?:\{\{else\}\}(.+?))?\{\{\/if\}\}/;
+  public static readonly CONDITION_PATTERN: RegExp = /(.+) (==|===|!=|!==|>|>=|<|<=|&&|\|\||%|\^) (.+)/;
+  public static readonly CYCLE_STATEMENT_PATTERN: RegExp = /\{\{forEach (.+?) in (.+?)\}\}(.+?)\{\{\/forEach\}\}/;
   
   public static build(config: AbsTemplateBuildConfig): void {
     try {
@@ -70,8 +71,8 @@ export class AbsTemplate {
   }
 
   private static parseParameters(template: string, data: AbsTemplateData, patternOverride?: RegExp): string {
-    const parameterPattern = new RegExp(patternOverride || this.PARAMETER_MATCH_PATTERN, '');
-    const matches = this.getParseMatches(template, patternOverride || this.PARAMETER_MATCH_PATTERN);
+    const parameterPattern = new RegExp(patternOverride || this.PARAMETER_PATTERN, '');
+    const matches = this.getParseMatches(template, patternOverride || this.PARAMETER_PATTERN);
     matches?.forEach(match => {
       const dataMatches = parameterPattern.exec(match) as Array<string>;
       const key = dataMatches[1];
@@ -84,7 +85,6 @@ export class AbsTemplate {
   }
 
   private static parseConditions(template: string, data: AbsTemplateData): string {
-    //TODO
     //BUG if there are multiple statements of the same type inside each other
     //the first level will probably match very first closing pattern found (the inner-most statement)
     //and the result is overlapped
@@ -92,6 +92,60 @@ export class AbsTemplate {
     //by passing the `conditionContent` of the current match as restricted `template` parameter
     //as this will work recursively by finding the inner-most level
     //and leave only the correct closing pattern as last one
+    const conditionStatementPattern = new RegExp(this.CONDITION_STATEMENT_PATTERN, '');
+    const conditionPattern = new RegExp(this.CONDITION_PATTERN, '');
+    const matches = this.getParseMatches(template, this.CONDITION_STATEMENT_PATTERN);
+    matches?.forEach(match => {
+      const matchGroups = conditionStatementPattern.exec(match) as Array<string>;
+      const statementBlock: string = matchGroups[0];
+      const condition: string = matchGroups[1];
+      const parsedCondition: Array<string>|undefined = conditionPattern.exec(condition) as Array<string>;
+      const isConditionSingleParameter = !Boolean(parsedCondition);
+      const positiveContent: string = matchGroups[2];
+      const negativeContent: string|undefined = matchGroups[3];
+      const printConditionResult = (conditionResult: boolean): void => {
+        if(Boolean(conditionResult)) {
+          template = template.replace(statementBlock, positiveContent);
+        } else {
+          template = template.replace(statementBlock, negativeContent || '');
+        }
+      };
+      if(isConditionSingleParameter) {
+        const parameter = (data as Record<string,string>)[condition];
+        printConditionResult(Boolean(parameter));
+      } else {
+        const sanitizeParameter = (parameter: string): boolean|null|undefined|string|number => {
+          return (
+            !Number.isNaN(parseFloat(parameter)) ? parseFloat(parameter) :
+            parameter === 'true' ? true :
+            parameter === 'false' ? false :
+            parameter === 'undefined' ? undefined :
+            parameter === 'null' ? null :
+            parameter
+          );
+        };
+        const conditionMatchGroups = conditionPattern.exec(condition) as Array<string>;
+        const firstParameter = sanitizeParameter(conditionMatchGroups[1]);
+        const operator = conditionMatchGroups[2];
+        const secondParameter = sanitizeParameter(conditionMatchGroups[3]);
+        let conditionResult: boolean = false;
+        switch(operator) {
+          case '==':  conditionResult = Boolean((firstParameter as any) ==  (secondParameter as any)); break;
+          case '===': conditionResult = Boolean((firstParameter as any) === (secondParameter as any)); break;
+          case '!=':  conditionResult = Boolean((firstParameter as any) !=  (secondParameter as any)); break;
+          case '!==': conditionResult = Boolean((firstParameter as any) !== (secondParameter as any)); break;
+          case '>':   conditionResult = Boolean((firstParameter as any) >   (secondParameter as any)); break;
+          case '>=':  conditionResult = Boolean((firstParameter as any) >=  (secondParameter as any)); break;
+          //case '<':   conditionResult = Boolean((firstParameter as any) <   (secondParameter as any)); break;
+          //case '<=':  conditionResult = Boolean((firstParameter as any) <=  (secondParameter as any)); break;
+          case '&&':  conditionResult = Boolean((firstParameter as any) &&  (secondParameter as any)); break;
+          case '||':  conditionResult = Boolean((firstParameter as any) ||  (secondParameter as any)); break;
+          case '%':   conditionResult = Boolean(parseFloat(firstParameter as string) % parseFloat(secondParameter as string)); break;
+          case '^':   conditionResult = Boolean(parseFloat(firstParameter as string) ^ parseFloat(secondParameter as string)); break;
+        }
+        printConditionResult(conditionResult);
+      }
+    });
     return template;
   }
 
@@ -103,10 +157,10 @@ export class AbsTemplate {
     //by passing the `cycleContent` of the current match as restricted `template` parameter
     //as this will work recursively by finding the inner-most level
     //and leave only the correct closing pattern as last one
-    const cyclePattern = new RegExp(this.CYCLE_MATCH_PATTERN, '');
-    const matches = this.getParseMatches(template, this.CYCLE_MATCH_PATTERN);
+    const cycleStatementPattern = new RegExp(this.CYCLE_STATEMENT_PATTERN, '');
+    const matches = this.getParseMatches(template, this.CYCLE_STATEMENT_PATTERN);
     matches?.forEach(match => {
-      const matchGroups = cyclePattern.exec(match) as Array<string>;
+      const matchGroups = cycleStatementPattern.exec(match) as Array<string>;
       const itemKey = matchGroups[1];
       const listKey = matchGroups[2];
       const cycleContent = matchGroups[3];
