@@ -33,11 +33,7 @@ export class AbsTemplate {
       }
 
       const parsedNode = this.util.stringToNode(templateNodeContentString);
-      const mockNode = document.createElement('mock');
-      mockNode.appendChild(parsedNode);
-      const parsedNodeContent = Array.from(mockNode.querySelectorAll('div>*')) as HTMLElement[];
-      
-      this.print(parsedNodeContent, config.printTargetNode, config.printMethod);
+      this.print((Array.from(parsedNode.childNodes) as HTMLElement[]), config.printTargetNode, config.printMethod);
     } catch (error) {
       console.error(error);
     }
@@ -51,17 +47,13 @@ export class AbsTemplate {
     return parsedDocumentBodyNode.innerHTML;
   }
 
-  private static print(node: HTMLElement | HTMLElement[], target: HTMLElement, method: AbsTemplatePrintMethod): void {
-    if(Array.isArray(node)) {
-      if(method === AbsTemplatePrintMethod.AFTER_BEGIN || method === AbsTemplatePrintMethod.AFTER_END) {
-        node.reverse();
-      }
-      node.forEach(nodeItem => {
-        target.insertAdjacentElement(method, nodeItem);
-      });
-    } else {
-      target.insertAdjacentElement(method, node);
+  private static print(node: HTMLElement[], target: HTMLElement, method: AbsTemplatePrintMethod): void {
+    if(method === AbsTemplatePrintMethod.AFTER_BEGIN || method === AbsTemplatePrintMethod.AFTER_END) {
+      node.reverse();
     }
+    node.forEach(nodeItem => {
+      nodeItem.nodeType !== Node.TEXT_NODE && target.insertAdjacentElement(method, nodeItem);
+    });
   }
 
   private static getParseMatches = (template: string, pattern: RegExp): RegExpMatchArray | null => {
