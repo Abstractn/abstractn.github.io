@@ -63,6 +63,7 @@ export class AbsTranslate {
     return this._utils.deepCopy(this._dictionary as Array<any>) as AbsTranslateDictionary[];
   }
 
+  //TODO change method name to `getTranslation`
   public static translate(translationKey: AbsTranslateDictionaryTranslationKey, language: AbsTranslateDictionaryId = this._currentLanguage as AbsTranslateDictionaryId): string | undefined {
     try {
       if(this._dictionary === undefined) throw `[ABS] Dictionary is not defined.`;
@@ -75,6 +76,9 @@ export class AbsTranslate {
       console.error(error);
     }
   }
+
+  //TODO define new method `translate` that allows to run translation within a restricted node
+  // useful for after DOM is altered by script
 
   public static addDictionary(newDictionary: AbsTranslateDictionary): void {
     this._dictionary = this._dictionary || [];
