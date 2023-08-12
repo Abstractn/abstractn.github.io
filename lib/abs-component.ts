@@ -1,6 +1,7 @@
 export interface AbsComponent {
   init: () => void;
   ready?: () => void;
+  destroy?: () => void;
   node: HTMLElement;
 }
 
@@ -67,5 +68,48 @@ export class AbsComponentManager {
         console.error(error);
       }
     }
+  }
+
+  public static getComponentByNode(componentNode: HTMLElement): AbsComponent | undefined {
+    let res: AbsComponent | undefined = undefined;
+    Object.keys(this.components).forEach(componentName => {
+      const componentSearchResult = this.components[componentName].find(componentInstance => componentInstance.node === componentNode);
+      if(componentSearchResult) {
+        res = componentSearchResult;
+      }
+    });
+    return res;
+  }
+
+  public static destroyComponent(component: AbsComponent): void {
+    Object.keys(this.components).forEach(componentName => {
+      const componentSearchResult = this.components[componentName].find(componentInstance => componentInstance === component);
+      if(componentSearchResult) {
+        const subComponentsNodeList = component.node.querySelectorAll(`[${this.nodeAttributeSelector}]`);
+        subComponentsNodeList.forEach(subComponentNode => {
+          const subComponentReference = this.getComponentByNode(subComponentNode as HTMLElement);
+          if(subComponentReference) this.destroyComponent(subComponentReference);
+        });
+        if(component.destroy) component.destroy();
+        
+        component.node.remove();
+        
+        const componentIndex = this.components[componentName].indexOf(component);
+        this.components[componentName].splice(componentIndex, 1);
+      }
+    });
+  }
+
+  public static purgeComponentsList(): void {
+    Object.keys(this.components).forEach(componentName => {
+      this.components[componentName].forEach(component => {
+        const componentAttributeName = component.node.getAttribute(this.nodeAttributeSelector);
+        const isComponentAlive = Boolean(
+          document.querySelector(`[${this.nodeAttributeSelector}="${componentAttributeName}"]`)
+        );
+        
+        if(!isComponentAlive) this.destroyComponent(component);
+      });
+    });
   }
 }
