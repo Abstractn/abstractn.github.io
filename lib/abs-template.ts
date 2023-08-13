@@ -69,7 +69,7 @@ export class AbsTemplate {
       const dataMatches = parameterPattern.exec(match) as Array<string>;
       const key = dataMatches[1];
       const keyValue = (data as Record<string, string>)[key];
-      if(keyValue) {
+      if(keyValue || keyValue === '') {
         template = template.replace(match, keyValue);
       }
     });
