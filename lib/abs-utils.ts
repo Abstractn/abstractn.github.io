@@ -41,6 +41,33 @@ export function getNode(
   }
 }
 
+declare global {
+  interface Document {
+    getNode(query: string): HTMLElement | null;
+    getNodes(query: string): HTMLElement[] | null;
+    setStyle(property: string, value: string): void;
+    setStyles(propertyObject: Record<string, string>): void;
+  }
+  interface Element {
+    getNode(query: string): HTMLElement | null;
+    getNodes(query: string): HTMLElement[] | null;
+    setStyle(property: string, value: string): void;
+    setStyles(propertyObject: Record<string, string>): void;
+  }
+  interface HTMLElement {
+    getNode(query: string): HTMLElement | null;
+    getNodes(query: string): HTMLElement[] | null;
+    setStyle(property: string, value: string): void;
+    setStyles(propertyObject: Record<string, string>): void;
+  }
+  interface Node {
+    getNode(query: string): HTMLElement | null;
+    getNodes(query: string): HTMLElement[] | null;
+    setStyle(property: string, value: string): void;
+    setStyles(propertyObject: Record<string, string>): void;
+  }
+}
+
 export function getNodes(
   query: string,
   context?: HTMLElement
@@ -53,3 +80,14 @@ export function getNodes(
     return res.length ? res : null;
   }
 }
+
+[Document, Element, HTMLElement, Node].forEach(NativeClass => {
+  NativeClass.prototype.getNode = function (query: string) { return getNode(query, this); }
+  NativeClass.prototype.getNodes = function (query: string) { return getNodes(query, this); };
+  NativeClass.prototype.setStyle = function(property: string, value: string) { this.style[property] = value; };
+  NativeClass.prototype.setStyles = function (propertyObject: Record<string, string>) {
+    Object.keys(propertyObject).forEach(property => {
+      this.style[property] = propertyObject[property];
+    });
+  };
+});
