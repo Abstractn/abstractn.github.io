@@ -1,0 +1,13 @@
+<component
+  cmp="InputArea"
+  {{#if classes}} class="{{classes}}" {{/if}}
+>
+  {{#if label}}<label>{{label}}</label>{{/if}}
+  <div class="textarea-wrapper">
+    <textarea
+      spellcheck="false"
+      {{#if inputAttributes}}{{inputAttributes}}{{/if}}
+      {{#if placeholder}}{{placeholder}}{{/if}}
+    >{{#if initialValue}}{{initialValue}}{{/if}}</textarea>
+  </div>
+</component>

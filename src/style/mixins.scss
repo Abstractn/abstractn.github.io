@@ -1,0 +1,44 @@
+// src:https://codepen.io/robdongas/pen/XmJbYE
+$breakpoints: (
+  'mob-down': ( max-width: 576px ),
+  'mob-up':   ( min-width: 767px ),
+  'tab-down': ( max-width: 768px ),
+  'tab-up':   ( min-width: 1199px ),
+  'dsk-down': ( max-width: 1200px ),
+  'dsk-up':   ( min-width: 1920px )
+);
+
+@mixin breakpoint($name) {
+  @if map-has-key($breakpoints, $name) {
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Couldn't find a breakpoint named `#{$name}`.";
+  }
+}
+
+
+
+// custom util breakpoint classes
+
+.-dsk {
+  --display: block;
+  display: var(--display);
+}
+
+.-mob {
+  --display: block;
+  display: none;
+}
+
+@include breakpoint(tab-down) {
+  .-dsk {
+    display: none;
+  }
+  
+  .-mob {
+    display: var(--display);
+  }
+}

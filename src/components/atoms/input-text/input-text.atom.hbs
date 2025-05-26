@@ -1,0 +1,11 @@
+<component
+  cmp="InputText"
+  {{#if classes}} class="{{classes}}" {{/if}}
+>
+  {{#if label}}<label>{{label}}</label>{{/if}}
+  <input
+    type="text"
+    {{#if initialValue}} value="{{initialValue}}" {{/if}}
+    {{#if inputAttributes}}{{inputAttributes}}{{/if}}
+  />
+</component>

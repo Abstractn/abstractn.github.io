@@ -1,63 +1,22 @@
+<!doctype html>
 <html lang="en">
-    <head>    
-        <meta charset="utf8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <meta name="description" content=""> -->
-        <!-- <meta name="keywords" content=""> -->
-        <title>Abstractn</title>
-        <link rel="icon" type="image/png" sizes="256x256" href="abs.ico">
-        <link rel="stylesheet" type="text/css" href="res/style/reset.css">
-        <link rel="stylesheet" type="text/css" href="https://abstractn.github.io/repo/abs.css">
-        <link rel="stylesheet" type="text/css" href="res/style/global.css">
-        <link rel="stylesheet" type="text/css" href="res/style/anims.css">
-        <script src="https://kit.fontawesome.com/e97eac13ba.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-    </head>
-
-    <body>
-        <div id="bgimage"></div>
-        <main>
-            <div id="box-main" class="box flex col center">
-                <div class="box-header">
-                   <img src="res/imgs/abstractn-logo.png" id="logo" alt="Abstractn"> 
-                </div>                
-                <hr class="hr-mid">
-                <div class="box-body relative" style="width: 300px; height: 200px;"> <!-- TODO move style to css -->
-                    <!-- <div id="sign" class="rounded-elegance aa unselectable">Abstractn</div> -->
-                    <div id="menu-main" class="flex col center absolute">
-                        <!-- <a id="linktree-resume" href="#" class="menu-main-item disabled" tabindex="1">RESUME</a> -->
-                        <a id="linktree-music" class="menu-main-item" href="#music" tabindex="1">MUSIC</a>
-                        <a id="linktree-literature" class="menu-main-item" href="https://abstractngt.deviantart.com" target="_blank" tabindex="1">LITERATURE</a>
-                        <!-- <a id="linktree-gaming" class="menu-main-item disabled" href="#" tabindex="1">GAMING</a> -->
-                        <a id="linktree-code" class="menu-main-item" href="https://abstractn.github.io/rand" tabindex="1">CODE</a>
-                    </div>
-                    <div id="menu-music" class="flex col center absolute hidden"> <!-- TODO margin:auto + width:100% -->
-                        <i link href="#" class="link music-to-home bi bi-chevron-compact-left menu-music-item" tabindex="-1"></i>
-                        <div class="flex row">
-                            <i
-                                link
-                                link-newtab
-                                title="Google Drive"
-                                class="custom-icon menu-music-item"
-                                src="res/imgs/icons/g-drive.png"
-                                href="https://drive.google.com/drive/folders/1Oz8HGo32nvuMqGdONZstJXA8PhBOYjNg?usp=sharing"
-                                tabindex="-1">
-                            </i>
-                            <i
-                                link
-                                link-newtab
-                                title="Mega"
-                                class="custom-icon menu-music-item"
-                                src="res/imgs/icons/mega.png"
-                                href="https://mega.nz/folder/8GIhQSrb#F0HuExk980tVhxRofwe1YA"
-                                tabindex="-1">
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </body>
-    <script src="res/script/libs/jquery.js"></script>
-    <script src="res/script/main.js"></script>
+  <head>
+    <script id="redirect-guard">
+      (() => {
+        const originPathName = '/abs-webtools/';
+        const targetPathName = '/abs-webtools/dist/';
+        const currentPathName = window.location.pathname;
+        if(currentPathName === originPathName) {
+          window.location = targetPathName;
+        }
+      })();
+    </script>
+  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="256x256" href="abs.ico">
+    <script src="https://kit.fontawesome.com/e97eac13ba.js" crossorigin="anonymous"></script>
+    <title>Abstractn</title>
+  </head>
+  {{> main }}
 </html>

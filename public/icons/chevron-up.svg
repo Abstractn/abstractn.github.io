@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="-10 -10 20 20">
+  <!-- <circle r=".1" cx="-10" cy="0" fill="red" /> -->
+  <path d="M -9,3 -8,3 0,-3 8,3 9,3 0,-3.9 Z" fill="white" />
+</svg>

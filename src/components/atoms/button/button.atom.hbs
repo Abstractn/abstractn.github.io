@@ -1,0 +1,34 @@
+{{#if url}}
+  <a
+    class="button button-{{type}} {{#if reverseIcon}}icon-reverse{{/if}} {{classes}}"
+    {{#if attributes}}{{attributes}}{{/if}}
+    href="{{url}}"
+    {{#if urlTarget}}target="{{urlTarget}}"{{/if}}
+    {{#if urlRel}}rel="{{urlRel}}"{{/if}}
+  >
+    {{#if icon}}
+      {{> components/atoms/micon/micon.atom
+        name=icon
+        classes="button-icon"
+      }}
+    {{/if}}
+    {{#if label}}
+      <span class="button-label {{labelClasses}}">{{label}}</span>
+    {{/if}}
+  </a>
+{{else}}
+  <button
+    class="button button-{{type}} {{#if reverseIcon}}icon-reverse{{/if}} {{classes}}"
+    {{#if attributes}}{{attributes}}{{/if}}
+  >
+    {{#if icon}}
+      {{> components/atoms/micon/micon.atom
+        name=icon
+        classes="button-icon"
+      }}
+    {{/if}}
+    {{#if label}}
+      <span class="button-label">{{label}}</span>
+    {{/if}}
+  </button>
+{{/if}}

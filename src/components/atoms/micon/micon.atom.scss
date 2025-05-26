@@ -1,0 +1,30 @@
+@import './micon-collection.scss';
+
+.micon {
+  --default-size: 24px;
+  --width: var(--default-size);
+  --height: var(--default-size);
+
+  display: inline-block;
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  background-color: black;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+
+  &[name] {
+    // `--path` is defined in `./micon-collection.scss`
+    -webkit-mask-image: var(--path);
+    mask-image: var(--path);
+  }
+
+  //--- COLORS
+  /* &.color-red { background-color: red; }
+  &.color-white { background-color: white; }
+  &.color-transparent { background-color: transparent; } */
+}

@@ -1,0 +1,27 @@
+<component
+  cmp="InputNumber"
+  {{#if classes}} class="{{classes}}" {{/if}}
+>
+  {{#if label}}<label>{{label}}</label>{{/if}}
+  <input
+    type="number"
+    {{#if min}} min="{{min}}" {{/if}}
+    {{#if max}} max="{{max}}" {{/if}}
+    {{#if initialValue}} value="{{initialValue}}" {{/if}}
+    {{#if inputAttributes}}{{inputAttributes}}{{/if}}
+  />
+  {{#if controls}}
+  <div class="input-controls">
+    <button js-up>
+      {{> components/atoms/micon/micon.atom
+        name="chevron-up"
+      }}
+    </button>
+    <button js-down>
+      {{> components/atoms/micon/micon.atom
+        name="chevron-down"
+      }}
+    </button>
+  </div>
+  {{/if}}
+</component>

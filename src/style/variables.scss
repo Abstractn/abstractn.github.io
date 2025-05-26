@@ -1,0 +1,9 @@
+:root {
+  --page-spacing: 60px;
+  --transition-duration: .25s;
+  --header-height: 70px;
+
+  @include breakpoint(mob-down) {
+    --page-spacing: 30px;
+  }
+}

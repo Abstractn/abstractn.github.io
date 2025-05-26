@@ -1,0 +1,151 @@
+[cmp="Background"] {
+  --meat: #BD3E3AFF;
+  --rose: #BD5288FF;
+  --salmon: #7E1D26FF;
+  --cream: #EDC7A1FF;
+  --purple: #4C275AFF;
+  --blue: #24104BFF;
+  --off: #00000000;
+  --noixe-low: #090026FF;
+  --noixe-low: #110030FF;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: black;
+
+  bge {
+    display: block;
+    position: fixed;
+    top: calc(var(--t) - (var(--h) / 2));
+    left: calc(var(--l) - (var(--w) / 2));
+    width: var(--w);
+    height: var(--h);
+    //border-radius: var(--size);
+    
+    &[back] {
+      --w: 2000px;
+      --h: 1000px;
+      --t: 50%;
+      --l: 50%;
+      background: radial-gradient(
+        farthest-side,
+        var(--noixe-low),
+        var(--off),
+      );
+      filter: blur(200px);
+    }
+    
+    &[meat] {
+      --w: 1000px;
+      --h: 1000px;
+      --t: 30%;
+      --l: 60%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--meat),
+        var(--off),
+      );
+      filter: blur(120px);
+    }
+
+    &[rose] {
+      --w: 680px;
+      --h: 600px;
+      --t: 36%;
+      --l: 55%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--rose),
+        var(--off),
+      );
+      filter: blur(20px);
+    }
+    
+    &[salmon] {
+      --w: 700px;
+      --h: 550px;
+      --t: 30%;
+      --l: 68%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--salmon),
+        var(--off),
+      );
+      filter: blur(20px);
+    }
+
+    &[cream] {
+      --w: 600px;
+      --h: 400px;
+      --t: 45%;
+      --l: 65%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--cream),
+        var(--off)
+      );
+      transform: rotate(-35deg);
+      filter: blur(100px);
+    }
+    
+    &[purple] {
+      --w: 770px;
+      --h: 510px;
+      --t: 55%;
+      --l: 35%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--purple),
+        var(--off),
+      );
+      transform: rotate(30deg);
+      filter: blur(10px);
+    }
+
+    &[blue] {
+      --w: 600px;
+      --h: 300px;
+      --t: 80%;
+      --l: 25%;
+
+      background: radial-gradient(
+        closest-side,
+        var(--blue),
+        var(--off),
+      );
+      transform: rotate(30deg);
+      filter: blur(20px);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* .page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/imgs/abs_bg-blur.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  } */

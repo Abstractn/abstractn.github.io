@@ -1,0 +1,63 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, .4);
+  padding: 8px 16px;
+  border: solid white 1px;
+  border-radius: 0;
+  transition: var(--transition-duration);
+
+  &.button-primary {
+    color: black;
+    background-color: white;
+    mix-blend-mode: screen;
+
+    .button-icon {
+      background-color: black;
+    }
+  }
+
+  &.button-secondary {
+    color: white;
+    background-color: rgba(0, 0, 0, .4);
+    border: solid white 1px;
+
+    .button-icon {
+      background-color: white;
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, .6);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 4px white;
+    }
+  }
+
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  //TODO primary style with
+  //
+  // color: black;
+  // background-color: white;
+  // mix-blend-mode: screen; // masks black
+
+  //TODO secondary style with
+  //
+  // color: white;
+  // background-color: transparent;
+  // border: solid white 1px;
+
+  &.icon-reverse {
+    flex-direction: row-reverse;
+  }
+}

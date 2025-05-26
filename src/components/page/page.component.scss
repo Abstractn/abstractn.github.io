@@ -1,0 +1,18 @@
+[cmp="Page"] {
+  position: relative;
+
+  main {
+    margin-top: calc( var(--header-height) + 60px);
+    margin-left: var(--page-spacing);
+    margin-right: var(--page-spacing);
+  }
+
+  view {
+    display: none;
+    
+    &.visible {
+      --display: block;
+      display: var(--display);
+    }
+  }
+}

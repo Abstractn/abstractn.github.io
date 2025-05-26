@@ -1,0 +1,7 @@
+.micon {
+  &[name="chevron-up"] { --path: url('/icons/chevron-up.svg'); }
+  &[name="chevron-down"] { --path: url('/icons/chevron-down.svg'); }
+  &[name="menu"] { --path: url('/icons/menu.svg'); }
+  &[name="close"] { --path: url('/icons/close.svg'); }
+  &[name="search"] { --path: url('/icons/search.svg'); }
+}

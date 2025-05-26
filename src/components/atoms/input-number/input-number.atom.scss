@@ -1,0 +1,75 @@
+[cmp="InputNumber"] {
+  position: relative;
+
+  input {
+    width: 100%;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: 200;
+    background-color: transparent;
+    padding: 8px 10px;
+    padding-right: 24px;
+    border: none;
+    border-left: solid white 1px;
+    transition: var(--transition-duration);
+
+    &::placeholder {
+      color: #CCC;
+    }
+  
+    &:focus {
+      background-color: rgba(0, 0, 0, .4);
+      //box-shadow: 0px 0px 4px white;
+      outline: none;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  }
+
+  .input-controls {
+    button {
+      --size: 16px;
+      --padding: 2px;
+
+      background-color: transparent;
+      border: 0;
+      border-radius: 2px;
+      padding: var(--padding);
+      position: absolute;
+      right: 2px;
+      width: calc(var(--size) + (var(--padding) * 2));
+      height: calc(var(--size) + (var(--padding) * 2));
+      transition: var(--transition-duration);
+      cursor: pointer;
+
+      &[js-up] {
+        top: 0;
+      }
+      
+      &[js-down] {
+        bottom: 0;
+      }
+
+      &:focus {
+        outline: none;
+        background-color: rgba(0, 0, 0, .4);
+      }
+
+      .micon {
+        width: var(--size);
+        height: var(--size);
+        background-color: white;
+      }
+    }
+  }
+}

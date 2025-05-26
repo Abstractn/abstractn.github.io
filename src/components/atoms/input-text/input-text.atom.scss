@@ -1,0 +1,25 @@
+[cmp="InputText"] {
+  
+  input {
+    width: 100%;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: 200;
+    background-color: transparent;
+    padding: 8px 10px;
+    border: none;
+    border-left: solid white 1px;
+    transition: var(--transition-duration);
+
+    &::placeholder {
+      color: #CCC;
+    }
+  
+    &:focus {
+      background-color: rgba(0, 0, 0, .4);
+      //box-shadow: 0px 0px 4px white;
+      outline: none;
+    }
+  }
+}
